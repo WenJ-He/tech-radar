@@ -1,6 +1,6 @@
 ---
 name: tech-radar-dataops
-description: 数据科学与可视化方向的英文一手源雷达。触发关键词:DuckDB、Polars、Apache Arrow、ClickHouse、StarRocks、Doris、Pinot、Druid、Iceberg、Hudi、Delta Lake、Lance、Lance-DB、Parquet、ORC、Avro、columnar storage、列存、lakehouse、数据湖、data lake、数据仓库、data warehouse、OLAP、HTAP、ETL、ELT、dbt、Dagster、Airflow、Prefect、Materialize、Flink、Spark、stream processing、流处理、CDC、change data capture、Debezium、向量数据库、vector database、pgvector、Qdrant、Weaviate、Milvus、ChromaDB、LanceDB、observable、observable framework、Plotly、Vega、D3、Apache ECharts、Grafana、Superset、Metabase、可视化、dashboard、EDA、探索性数据分析、高维数据、IoT 数据、传感器数据、遥感、time-series、时序数据库、TimescaleDB、QuestDB、InfluxDB、Prometheus、自动化报表、自动化分析 pipeline。当用户问"DuckDB 新版本"、"Iceberg vs Hudi"、"向量数据库选型"、"流处理论文"、"Observable Framework 实战"等任何数据栈 / 可视化 / 时序数据方向时使用。聚合 arXiv (cs.DB) + Hacker News + lobste.rs/databases,visualization 三个免 key 源。
+description: 数据科学与可视化方向的英文一手源雷达。触发关键词:DuckDB、Polars、Apache Arrow、ClickHouse、StarRocks、Doris、Pinot、Druid、Iceberg、Hudi、Delta Lake、Lance、Lance-DB、Parquet、ORC、Avro、columnar storage、列存、lakehouse、数据湖、data lake、数据仓库、data warehouse、OLAP、HTAP、ETL、ELT、dbt、Dagster、Airflow、Prefect、Materialize、Flink、Spark、stream processing、流处理、CDC、change data capture、Debezium、向量数据库、vector database、pgvector、Qdrant、Weaviate、Milvus、ChromaDB、LanceDB、observable、observable framework、Plotly、Vega、D3、Apache ECharts、Grafana、Superset、Metabase、可视化、dashboard、EDA、探索性数据分析、高维数据、IoT 数据、传感器数据、遥感、time-series、时序数据库、TimescaleDB、QuestDB、InfluxDB、Prometheus、自动化报表、自动化分析 pipeline、DuckDB 博客、DuckDB news、Bluesky 数据圈。当用户问"DuckDB 新版本"、"Iceberg vs Hudi"、"向量数据库选型"、"流处理论文"、"Observable Framework 实战"、"DuckDB 官方动态"等任何数据栈 / 可视化 / 时序数据方向时使用。聚合 arXiv (cs.DB) + Hacker News + lobste.rs/databases,visualization + Bluesky (策展 handles) + DuckDB 官方 RSS 多个免 key 源。
 ---
 
 # Tech Radar — 数据科学 & 可视化
@@ -69,6 +69,26 @@ curl -sLH "User-Agent: $UA" "https://lobste.rs/t/databases.json"
 curl -sLH "User-Agent: $UA" "https://lobste.rs/t/visualization.json"
 curl -sLH "User-Agent: $UA" "https://lobste.rs/t/datamining.json"
 ```
+
+### 4. Bluesky (策展 handles)
+
+详见 [[tech-radar-ai-infra]] SKILL.md 第 5 节(`getAuthorFeed` 用法)。数据栈圈推荐候选(全部待 `resolveHandle` 验证):
+
+| Handle | 内容 |
+|---|---|
+| `duckdb.bsky.social` | DuckDB 官号 |
+| `clickhouse.bsky.social` | ClickHouse 官号 |
+| `dbt.bsky.social` | dbt Labs 官号 |
+| `pgvector.bsky.social` | pgvector 项目 |
+
+### 5. DuckDB 官方 RSS
+
+```bash
+curl -sLH "User-Agent: tech-radar-skill/0.1.0" "https://duckdb.org/feed.xml" -o /tmp/duck.xml
+# RSS 2.0,Python 标准库 ET 解析(模板见 [[tech-radar-ai-infra]] 第 6 节)
+```
+
+DuckDB feed 条目少(~10 条),不必时间窗截断,直接全拉。其它数据库厂商如 ClickHouse / Snowflake / Databricks 没有稳定公开 RSS,**走 HN 关键词 + 官号 Bluesky 替代**。
 
 ## 工作流
 

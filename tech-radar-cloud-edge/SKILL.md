@@ -1,6 +1,6 @@
 ---
 name: tech-radar-cloud-edge
-description: 云计算与边缘计算方向的英文一手源雷达。触发关键词:云计算、cloud computing、分布式系统、distributed systems、Kubernetes、k8s、container orchestration、serverless、无服务计算、FaaS、Lambda、Cloud Run、Fargate、主权云、sovereign cloud、企业云、区域云、私有云、混合云、hybrid cloud、多云、multi-cloud、弹性伸缩、autoscaling、resource scheduling、资源调度、cluster scheduler、边缘计算、edge computing、边缘 AI、edge AI、边缘推理、edge inference、低延迟推理、低延迟、low-latency、5G MEC、IoT 平台、Cloudflare Workers、Fastly Compute、Wasm runtime、WebAssembly、service mesh、Istio、Linkerd、Envoy、observability、tracing、OpenTelemetry、eBPF、CNI、CSI、Karpenter、KEDA、Crossplane。当用户问"k8s 最近新特性"、"serverless 行业有什么新东西"、"边缘 AI 推理新方案"、"分布式系统论文综述"等任何云原生 / 分布式 / 边缘方向时使用。聚合 arXiv (cs.DC/cs.NI/cs.OS) + Hacker News + lobste.rs/distributed,devops 三个免 key 源。
+description: 云计算与边缘计算方向的英文一手源雷达。触发关键词:云计算、cloud computing、分布式系统、distributed systems、Kubernetes、k8s、container orchestration、serverless、无服务计算、FaaS、Lambda、Cloud Run、Fargate、主权云、sovereign cloud、企业云、区域云、私有云、混合云、hybrid cloud、多云、multi-cloud、弹性伸缩、autoscaling、resource scheduling、资源调度、cluster scheduler、边缘计算、edge computing、边缘 AI、edge AI、边缘推理、edge inference、低延迟推理、低延迟、low-latency、5G MEC、IoT 平台、Cloudflare Workers、Fastly Compute、Wasm runtime、WebAssembly、service mesh、Istio、Linkerd、Envoy、observability、tracing、OpenTelemetry、eBPF、CNI、CSI、Karpenter、KEDA、Crossplane、LWN、kernel news、Bluesky 云原生圈。当用户问"k8s 最近新特性"、"serverless 行业有什么新东西"、"边缘 AI 推理新方案"、"分布式系统论文综述"、"LWN 最近内核动态"等任何云原生 / 分布式 / 边缘方向时使用。聚合 arXiv (cs.DC/cs.NI/cs.OS) + Hacker News + lobste.rs/distributed,devops + Bluesky (策展 handles) + LWN RSS 多个免 key 源。
 ---
 
 # Tech Radar — 云计算 & 边缘计算
@@ -70,6 +70,36 @@ curl -sLH "User-Agent: $UA" "https://lobste.rs/t/distributed.json"
 curl -sLH "User-Agent: $UA" "https://lobste.rs/t/devops.json"
 curl -sLH "User-Agent: $UA" "https://lobste.rs/t/virtualization.json"
 ```
+
+### 4. Bluesky (策展 handles)
+
+Bluesky `getAuthorFeed` 匿名可用;`searchPosts` 需鉴权,不走。详见 [[tech-radar-ai-infra]] SKILL.md 第 5 节。
+
+云原生圈推荐 handle (✓ 已验证;其余待 `resolveHandle` 探测):
+
+| Handle | 内容 |
+|---|---|
+| `kelseyhightower.com` | k8s 早期布道者 (待验证) |
+| `dvassallo.bsky.social` | AWS 内部视角、serverless 实战 (待验证) |
+| `brendangregg.bsky.social` | eBPF / 性能 (待验证) |
+| `cloudflare.bsky.social` | Cloudflare 官号 (待验证) |
+
+```bash
+curl -sG "https://public.api.bsky.app/xrpc/com.atproto.identity.resolveHandle" \
+  --data-urlencode "handle=brendangregg.bsky.social"
+# 200 + did → 存在;400 → 不存在,从列表里删
+```
+
+### 5. LWN headlines (RSS)
+
+LWN.net 的 Features 板块,kernel / 容器 / distributed systems 长文为主:
+
+```bash
+curl -sLH "User-Agent: tech-radar-skill/0.1.0" "https://lwn.net/headlines/Features" -o /tmp/lwn.xml
+# RSS 2.0,Python 标准库 ET 解析(模板见 ai-infra 第 6 节)
+```
+
+按 pubDate 倒序 + 时间窗截断,只取最近 7-14 天。
 
 ## 工作流
 

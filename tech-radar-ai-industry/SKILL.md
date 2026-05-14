@@ -1,6 +1,6 @@
 ---
 name: tech-radar-ai-industry
-description: AI + 行业垂直落地方向的英文一手源雷达。触发关键词:自动驾驶、autonomous driving、L4、Robotaxi、Waymo、Cruise、Wayve、机器人、robotics、人形机器人、humanoid、具身智能、embodied AI、Figure、Tesla Optimus、Unitree、视觉语言动作模型、VLA、工业 AI、industrial AI、工业质检、defect detection、智能制造、smart manufacturing、predictive maintenance、金融 AI、fintech AI、金融风控、fraud detection、量化交易、algo trading、生物医药、biomedical AI、AI drug discovery、AI for science、医学影像、medical imaging、radiology AI、电子病历、临床决策、智慧城市、smart city、能源 AI、power grid AI、AI agent 应用、agentic application、垂直 AI、vertical AI、行业大模型、industry foundation model、多模态应用、multimodal application、API 聚合、microservice、模型服务化、model serving、低延迟推理(应用层)、跨系统集成。当用户问"自动驾驶最近的论文"、"人形机器人量产进度"、"AI 在金融风控的实战"、"医疗影像 AI 评测"等任何 AI + 行业落地方向时使用。**纯 AI 基础设施 / 模型 / 编译**走 [[tech-radar-ai-infra]],**纯 AI 产品消息**(Claude 更新等)走 aihot。本 skill 聚合 arXiv (cs.RO/eess.IV/q-bio.QM) + Hacker News + aihot 的 industry/ai-products 类别 三个免 key 源。
+description: AI + 行业垂直落地方向的英文一手源雷达。触发关键词:自动驾驶、autonomous driving、L4、Robotaxi、Waymo、Cruise、Wayve、机器人、robotics、人形机器人、humanoid、具身智能、embodied AI、Figure、Tesla Optimus、Unitree、视觉语言动作模型、VLA、工业 AI、industrial AI、工业质检、defect detection、智能制造、smart manufacturing、predictive maintenance、金融 AI、fintech AI、金融风控、fraud detection、量化交易、algo trading、生物医药、biomedical AI、AI drug discovery、AI for science、医学影像、medical imaging、radiology AI、电子病历、临床决策、智慧城市、smart city、能源 AI、power grid AI、AI agent 应用、agentic application、垂直 AI、vertical AI、行业大模型、industry foundation model、多模态应用、multimodal application、API 聚合、microservice、模型服务化、model serving、低延迟推理(应用层)、跨系统集成、Bluesky 机器人圈、OpenAI blog。当用户问"自动驾驶最近的论文"、"人形机器人量产进度"、"AI 在金融风控的实战"、"医疗影像 AI 评测"、"OpenAI 最近发布"等任何 AI + 行业落地方向时使用。**纯 AI 基础设施 / 模型 / 编译**走 [[tech-radar-ai-infra]],**纯 AI 产品消息**(Claude 更新等)走 aihot。本 skill 聚合 arXiv (cs.RO/eess.IV/q-bio.QM) + Hacker News + aihot 的 industry/ai-products 类别 + Bluesky (策展 handles) + OpenAI 官方博客 RSS 多个免 key 源。
 ---
 
 # Tech Radar — AI + 行业落地
@@ -83,6 +83,28 @@ curl -sH "User-Agent: $UA_AIHOT" \
 ```
 
 > 注意:这台 WSL 上 `aihot.virxact.com` 走本地代理 `127.0.0.1:7897` 会 TLS 报错,要 `env -u http_proxy -u https_proxy -u all_proxy ... curl ... --noproxy '*'` 直连。
+
+### 4. Bluesky (策展 handles)
+
+详见 [[tech-radar-ai-infra]] SKILL.md 第 5 节(`getAuthorFeed` 用法)。AI + 行业圈推荐候选(全部待 `resolveHandle` 验证):
+
+| Handle | 内容 |
+|---|---|
+| `waymo.bsky.social` | Waymo 官号 |
+| `wayve.bsky.social` | Wayve AI 官号 |
+| `figure.bsky.social` | Figure 机器人 |
+| `boston-dynamics.bsky.social` | Boston Dynamics |
+| `huggingface.bsky.social` | HF 官号(行业应用案例) |
+
+### 5. OpenAI 官方博客 RSS
+
+```bash
+curl -sLH "User-Agent: tech-radar-skill/0.1.0" "https://openai.com/blog/rss.xml" -o /tmp/oai.xml
+# RSS 2.0,~956 条全量历史
+# 必须按 pubDate 倒序 + 时间窗截断到最近 7-14 天,否则塞爆上下文
+```
+
+OpenAI blog 跨 ai-infra / ai-industry 两类内容,本 skill 只取**应用/行业**相关条目(Codex 应用、产品发布、企业案例);**纯模型发布 / API 更新走 aihot**。
 
 ## 工作流
 

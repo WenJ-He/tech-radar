@@ -1,6 +1,6 @@
 ---
 name: tech-radar-hpc-hardware
-description: HPC 与硬件协同优化方向的英文一手源雷达。触发关键词:HPC、高性能计算、超算、supercomputing、HPL、HPCG、CUDA、NVLink、NVSwitch、NVL72、Infiniband、RoCE、RDMA、GPUDirect、tensor core、张量核心、FP4、FP8、INT4、TF32、BF16、混合精度、mixed precision、Hopper、Blackwell、H100、H200、B200、GB200、MI300、MI325、TPU、Trainium、Groq、SambaNova、Cerebras、DGX、DGX Cloud、SuperPod、interconnect、collective communication、NCCL、RCCL、AllReduce、AllGather、ring/tree topology、gpu profiling、Nsight、rocprof、CUDA Graph、HIP、SYCL、oneAPI、ROCm、CUPY、CuTe、CUTLASS、warp specialization、async copy、TMA、Hopper Tensor Memory Accelerator、memory bandwidth、HBM、HBM3e、HBM4、PCIe、CXL、heterogeneous computing、异构计算、parallel algorithm、并行算法、performance modeling。当用户问"H200/B200 实测性能"、"NVLink 拓扑"、"FP8 训练实战"、"HPC 论文"、"NCCL 调优"等任何 HPC / 加速器硬件 / 互联 / 性能分析方向时使用。聚合 arXiv (cs.AR/cs.PF/cs.DC) + Hacker News + lobste.rs/hardware,performance 三个免 key 源。
+description: HPC 与硬件协同优化方向的英文一手源雷达。触发关键词:HPC、高性能计算、超算、supercomputing、HPL、HPCG、CUDA、NVLink、NVSwitch、NVL72、Infiniband、RoCE、RDMA、GPUDirect、tensor core、张量核心、FP4、FP8、INT4、TF32、BF16、混合精度、mixed precision、Hopper、Blackwell、H100、H200、B200、GB200、MI300、MI325、TPU、Trainium、Groq、SambaNova、Cerebras、DGX、DGX Cloud、SuperPod、interconnect、collective communication、NCCL、RCCL、AllReduce、AllGather、ring/tree topology、gpu profiling、Nsight、rocprof、CUDA Graph、HIP、SYCL、oneAPI、ROCm、CUPY、CuTe、CUTLASS、warp specialization、async copy、TMA、Hopper Tensor Memory Accelerator、memory bandwidth、HBM、HBM3e、HBM4、PCIe、CXL、heterogeneous computing、异构计算、parallel algorithm、并行算法、performance modeling、NVIDIA dev blog、Phoronix、Linux 性能、kernel benchmark、Bluesky 硬件圈。当用户问"H200/B200 实测性能"、"NVLink 拓扑"、"FP8 训练实战"、"HPC 论文"、"NCCL 调优"、"NVIDIA 开发者博客"、"Phoronix 最近评测"等任何 HPC / 加速器硬件 / 互联 / 性能分析方向时使用。聚合 arXiv (cs.AR/cs.PF/cs.DC) + Hacker News + lobste.rs/hardware,performance + Bluesky (策展 handles) + NVIDIA Dev Blog RSS + Phoronix RSS 多个免 key 源。
 ---
 
 # Tech Radar — HPC & 硬件协同
@@ -69,6 +69,33 @@ curl -sLH "User-Agent: $UA" "https://lobste.rs/t/hardware.json"
 curl -sLH "User-Agent: $UA" "https://lobste.rs/t/performance.json"
 curl -sLH "User-Agent: $UA" "https://lobste.rs/t/gpus.json"
 ```
+
+### 4. Bluesky (策展 handles)
+
+详见 [[tech-radar-ai-infra]] SKILL.md 第 5 节(`getAuthorFeed` 用法)。硬件圈推荐候选(全部待 `resolveHandle` 验证):
+
+| Handle | 内容 |
+|---|---|
+| `brendangregg.bsky.social` | 性能 / eBPF / flame graph 大佬 |
+| `chipsandcheese.bsky.social` | CPU/GPU 微架构评测 |
+| `tomshardware.bsky.social` | 硬件评测官号 |
+| `anandtech.bsky.social` | 硬件深度文 |
+
+### 5. 官方 RSS
+
+| 源 | RSS | 用途 |
+|---|---|---|
+| NVIDIA Dev Blog | `https://developer.nvidia.com/blog/feed` | CUDA / TensorRT / Triton / Nsight / cuDNN 深度文 |
+| NVIDIA News | `https://blogs.nvidia.com/feed/` | 硬件发布、合作案例 |
+| Phoronix | `https://www.phoronix.com/rss.php` | Linux 内核 / 驱动 / 硬件 benchmark |
+
+```bash
+curl -sLH "User-Agent: tech-radar-skill/0.1.0" "https://developer.nvidia.com/blog/feed" -o /tmp/nv-dev.xml
+curl -sLH "User-Agent: tech-radar-skill/0.1.0" "https://www.phoronix.com/rss.php" -o /tmp/phoronix.xml
+# RSS 2.0,Python 标准库 ET 解析(模板见 ai-infra 第 6 节)
+```
+
+NVIDIA Dev Blog 历史条目多(100+),必须按 pubDate 倒序 + 时间窗截断到最近 7-14 天。
 
 ## 工作流
 
